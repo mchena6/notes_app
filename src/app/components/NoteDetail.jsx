@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useNotes } from "../notes/NotesContext";
+import { useNotes } from "../context/NotesContext";
 
 export default function NoteDetail({ note }) {
   const { updateNote } = useNotes();

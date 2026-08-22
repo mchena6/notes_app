@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { useNotes } from "@/app/notes/NotesContext";
+import { useNotes } from "@/app/context/NotesContext";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
 
