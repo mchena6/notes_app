@@ -3,7 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import { useNotes, NotesProvider } from "@/app/notes/NotesContext";
+import { NotesProvider } from "@/app/context/NotesContext";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,15 +27,17 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <NotesProvider>
-          <Navbar />
-        </NotesProvider>
+      <ClerkProvider>
+        <body className="min-h-full flex flex-col">
+          <NotesProvider>
+            <Navbar />
+          </NotesProvider>
 
-        {children}
+          {children}
 
-        <Footer />
-      </body>
+          <Footer />
+        </body>
+      </ClerkProvider>
     </html>
   );
 }
