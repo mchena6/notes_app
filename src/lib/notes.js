@@ -11,9 +11,9 @@ export const notes = [
     title: "Rutas en Next.js",
     category_id: 1,
     content:
-      "Next.js utiliza un sistema de rutas basado en el sistema de archivos dentro de la carpeta app. Cada archivo page.jsx define automáticamente una ruta accesible desde el navegador. Por ejemplo, app/page.jsx corresponde a la ruta '/', mientras que app/about/page.jsx corresponde a '/about'. Esto elimina la necesidad de configurar manualmente un router como en otras librerías.",
+      "Next.js utiliza un sistema de rutas basado en el sistema de archivos dentro de la carpeta app. Cada archivo page.jsx define automáticamente una ruta accesible desde el navegador. Por example, app/page.jsx corresponde a la ruta '/', mientras que app/about/page.jsx corresponde a '/about'. Esto elimina la necesidad de configurar manualmente un router como en otras librerías.",
     createdAt: "2026-01-01",
-    ejemplo: `
+    example: `
 app/
   page.jsx        // → /
   about/
@@ -31,7 +31,7 @@ export default function Page() {
     content:
       "Las rutas dinámicas en Next.js permiten renderizar contenido basado en parámetros de la URL. Se definen usando corchetes en el nombre de la carpeta, como [id]. Next.js inyecta automáticamente estos valores en el objeto params dentro del componente, permitiendo acceder a datos dinámicos como IDs de una base de datos.",
     createdAt: "2026-01-02",
-    ejemplo: `
+    example: `
 export default async function page({ params }) {
 
   const { id } = await params
@@ -53,7 +53,7 @@ export default async function page({ params }) {
     content:
       "Las rutas anidadas permiten estructurar la aplicación en múltiples niveles utilizando carpetas dentro de otras carpetas. Esto ayuda a organizar mejor proyectos grandes y permite reutilizar layouts o lógica entre rutas relacionadas.",
     createdAt: "2026-01-03",
-    ejemplo: `
+    example: `
 app/
   dashboard/
     page.jsx            // → /dashboard
@@ -71,7 +71,7 @@ app/
     content:
       "Los layouts permiten compartir UI entre múltiples páginas, como navbars, sidebars o footers. Se definen con un archivo layout.jsx y envuelven automáticamente a todas las páginas dentro de su carpeta. Reciben la prop children que representa el contenido de cada página.",
     createdAt: "2026-01-04",
-    ejemplo: `
+    example: `
 export default function Layout({ children }) {
   return (
     <div>
@@ -87,9 +87,9 @@ export default function Layout({ children }) {
     title: "Layouts anidados",
     category_id: 3,
     content:
-      "Next.js permite tener múltiples layouts anidados. Cada layout envuelve al siguiente nivel de la jerarquía, permitiendo construir estructuras complejas de UI. Por ejemplo, un layout global puede contener un navbar, mientras que un layout interno puede agregar un sidebar específico.",
+      "Next.js permite tener múltiples layouts anidados. Cada layout envuelve al siguiente nivel de la jerarquía, permitiendo construir estructuras complejas de UI. Por example, un layout global puede contener un navbar, mientras que un layout interno puede agregar un sidebar específico.",
     createdAt: "2026-01-05",
-    ejemplo: `
+    example: `
 app/
   layout.jsx
   dashboard/
@@ -107,7 +107,7 @@ app/
     content:
       "En Next.js App Router, los componentes son Server Components por defecto. Esto significa que se ejecutan en el servidor, no envían JavaScript innecesario al cliente y pueden acceder directamente a bases de datos o APIs. No pueden usar hooks como useState o useEffect, pero mejoran significativamente el rendimiento.",
     createdAt: "2026-01-06",
-    ejemplo: `
+    example: `
 export default async function Page() {
   const data = await fetch("https://api.example.com")
 
@@ -127,7 +127,7 @@ export default async function Page() {
     content:
       "El spread operator en JavaScript permite expandir elementos de un array o propiedades de un objeto en otro array o objeto. Es útil para crear copias de arrays u objetos con modificaciones menores.",
     createdAt: "2026-01-06",
-    ejemplo: `
+    example: `
 const obj1 = { a: 1, b: 2 }
 const obj2 = { ...obj1, c: 3 } // { a: 1, b: 2, c: 3 }
 
