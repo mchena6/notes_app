@@ -1,50 +1,83 @@
-import { getProjects } from "@/lib/projects";
+"use client";
+import { useUser } from "@clerk/nextjs";
+import { useNotes } from "@/app/context/NotesContext";
+import NoteCard from "@/app/components/NoteCard";
+import Link from "next/link";
 
 export default function Page() {
-  const projects = getProjects();
+  const { user } = useUser();
+  const notesContext = useNotes();
+  const notes = notesContext?.notes || [];
+  console.log(notes);
+
+  const userAvatar =
+    user?.imageUrl ||
+    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80";
+  const userName = user?.fullName || user?.username || "Usuario";
+  const userEmail = user?.primaryEmailAddress?.emailAddress || "";
 
   return (
-    <main className="flex flex-col items-center pt-10">
-      <section className="w-full max-w-3xl flex flex-col items-center bg-zinc-800 rounded-lg p-10">
+    <main className="flex flex-col items-center pt-10 pb-16 bg-ghost text-text-dark min-h-screen">
+      {/* Header del Perfil */}
+      <section className="w-full max-w-3xl flex flex-col items-center bg-surface-card border border-mauve/40 rounded-xl p-8 shadow-sm text-text-dark">
         <img
-          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-          className="h-24 w-24 rounded-full"
-          alt=""
+          src={userAvatar}
+          className="h-24 w-24 rounded-full border-2 border-candy shadow-sm mb-4 object-cover"
+          alt={userName}
         />
-        <h1 className="text-3xl font-bold">Valentino</h1>
-        <p className="text-gray-400">
-          Desarrollador Fullstack especializado en React y Node.js
-        </p>
-        <p className="flex gap-1 items-center">
+        <h1 className="text-3xl font-bold text-text-dark">{userName}</h1>
+        {userEmail && (
+          <p className="text-text-muted-dark font-medium my-1">{userEmail}</p>
+        )}
+        <div className="flex gap-2 items-center text-candy font-semibold text-sm mt-3 bg-candy/10 px-3 py-1 rounded-full border border-candy/30">
           <svg
             width="16"
             height="16"
             fill="currentColor"
-            className="bi bi-geo-alt"
+            className="bi bi-journal-text"
             viewBox="0 0 16 16"
           >
-            <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
-            <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+            <path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5" />
+            <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2m0 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z" />
           </svg>
-          Argentina
-        </p>
+          <span>
+            {notes.length}{" "}
+            {notes.length === 1 ? "nota registrada" : "notas registradas"}
+          </span>
+        </div>
       </section>
 
-      <section>
-        <h2 className="text-2xl font-bold mt-10 mb-4">Proyectos</h2>
-        <div className="w-full max-w-3xl grid grid-cols-2 gap-6">
-          {projects.map((project) => (
-            <div key={project.id} className="bg-zinc-800 rounded-lg p-6">
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full object-cover rounded hover:scale-102 transition-transform duration-200"
-              />
-              <h3 className="text-xl font-semibold">{project.title}</h3>
-              <p className="text-gray-400">{project.description}</p>
-            </div>
-          ))}
+      {/* Sección Mis Notas */}
+      <section className="w-full max-w-3xl mt-10">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-bold text-text-dark">Mis Notas</h2>
+          <Link
+            href="/notes/create"
+            className="bg-candy text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-candy-hover transition-colors shadow-sm"
+          >
+            + Crear Nota
+          </Link>
         </div>
+
+        {notes.length > 0 ? (
+          <div className="w-full space-y-4">
+            {notes.map((note) => (
+              <NoteCard key={note.id} note={note} />
+            ))}
+          </div>
+        ) : (
+          <div className="w-full bg-surface-card border border-mauve/40 rounded-xl p-8 text-center flex flex-col items-center justify-center shadow-sm">
+            <p className="text-text-muted-dark font-medium text-base mb-4">
+              Aún no has creado ninguna nota.
+            </p>
+            <Link
+              href="/notes/create"
+              className="bg-candy text-white px-5 py-2.5 rounded-lg text-sm font-bold hover:bg-candy-hover transition-colors shadow-sm"
+            >
+              Crear mi primera nota
+            </Link>
+          </div>
+        )}
       </section>
     </main>
   );
