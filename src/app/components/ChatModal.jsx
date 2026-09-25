@@ -66,49 +66,49 @@ export default function ChatModal({ isOpen, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center
-     bg-black/40 backdrop-blur-xs"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
     >
       <div
-        className="w-full max-w-xl bg-zinc-900 border-zinc-700 rounded-lg
-      p-4 flex flex-col h-125"
+        className="w-full max-w-xl bg-surface-card border border-mauve/40 rounded-xl p-5 flex flex-col h-125 shadow-xl text-text-dark"
       >
         <div
-          className="flex justify-between items-center border-b border-zinc-700 
-        pb-2 mb-2"
+          className="flex justify-between items-center border-b border-mauve/20 pb-3 mb-3"
         >
-          <span className="font-bold text-sm">Itec IA</span>
+          <span className="font-bold text-xs text-candy uppercase tracking-wider">B-IA</span>
 
           <button
-            className="bg-zinc-700 px-2 py-1 rounded cursor-pointer"
+            className="bg-mauve/20 text-text-dark hover:bg-mauve px-3 py-1 rounded-lg text-sm font-semibold transition-colors cursor-pointer"
             onClick={onClose}
           >
             Cerrar
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto space-y-3">
+        <div className="flex-1 overflow-y-auto space-y-3 pr-1">
           {/* Renderizar mensajes del chat */}
           {messages.map((msg) => (
             <div
               key={msg.id}
-              className={`rounded p-2 max-w-[85%] 
-            ${msg.role === "user" ? "bg-zinc-700 ml-auto" : "bg-purple-700"}`}
+              className={`rounded-xl p-3 max-w-[85%] text-sm leading-relaxed border ${
+                msg.role === "user"
+                  ? "bg-mauve/20 text-text-dark border-mauve/40 ml-auto"
+                  : "bg-candy/15 text-text-dark border-candy/30"
+              }`}
             >
-              <p className="block text-xs text-zinc-400">
+              <p className="block text-xs font-bold text-text-muted-dark mb-1">
                 {msg.role === "user" ? "Tú" : "IA"}
               </p>
               <ReactMarkdown>{msg.text}</ReactMarkdown>
             </div>
           ))}
           {/* Mostrar estado de carga o error si existen */}
-          {loading && <p>cargando...</p>}
-          {error && <p>{error}</p>}
+          {loading && <p className="text-text-muted-dark text-sm animate-pulse">Cargando respuesta...</p>}
+          {error && <p className="text-red-500 text-sm font-semibold">{error}</p>}
         </div>
 
         <form
           onSubmit={handleSendMessage}
-          className="flex gap-2 pt-2 border-t border-zinc-700"
+          className="flex gap-2 pt-3 border-t border-mauve/20"
         >
           <input
             type="text"
@@ -116,13 +116,12 @@ export default function ChatModal({ isOpen, onClose }) {
             onChange={(e) => setInput(e.target.value)}
             disabled={loading}
             placeholder="Escribe tu mensaje..."
-            className="flex-1 bg-zinc-800 px-2 py-1.5 border border-zinc-600 
-          rounded outline-none focus:border-purple-500"
-          ></input>
+            className="flex-1 bg-ghost px-3 py-2 border border-mauve/40 text-text-dark placeholder-text-muted-dark/60 rounded-lg outline-none focus:ring-2 focus:ring-mauve text-sm"
+          />
           <button
             type="submit"
             disabled={loading || !input}
-            className="bg-purple-600 px-3 py-1.5 rounded font-bold"
+            className="bg-candy text-white font-bold px-4 py-2 rounded-lg text-sm hover:bg-candy-hover transition-colors cursor-pointer disabled:opacity-50"
           >
             Enviar
           </button>

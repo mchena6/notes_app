@@ -42,7 +42,7 @@ export default function NoteDetail({ note }) {
       width="16"
       height="16"
       fill="currentColor"
-      className="bi bi-pencil opacity-0 group-hover:opacity-100"
+      className="bi bi-pencil opacity-0 group-hover:opacity-100 text-mauve transition-opacity"
       viewBox="0 0 16 16"
     >
       <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325" />
@@ -50,10 +50,10 @@ export default function NoteDetail({ note }) {
   );
 
   return (
-    <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-      <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
+    <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-12 px-8 bg-ghost text-text-dark sm:items-start">
+      <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left w-full">
         <div
-          className="w-full hover:bg-zinc-800 transition-colors cursor-pointer rounded p-3 group"
+          className="w-full hover:bg-mauve/15 transition-colors cursor-pointer rounded-xl p-3 group border border-transparent hover:border-mauve/30"
           onDoubleClick={() => setEditingField("title")}
           title="Doble click para editar"
         >
@@ -65,11 +65,11 @@ export default function NoteDetail({ note }) {
                 setFormData({ ...formData, title: e.target.value })
               }
               autoFocus
-              className="max-w-xs text-3xl focus:outline-none focus:ring-2 focus:ring-green-300 w-full p-3 rounded m-1 font-semibold leading-10 tracking-tight text-black dark:text-zinc-50"
+              className="max-w-xs text-3xl focus:outline-none focus:ring-2 focus:ring-mauve w-full p-3 rounded-lg border border-mauve bg-surface-card m-1 font-bold leading-10 tracking-tight text-text-dark"
             />
           ) : (
             <div className="flex items-center gap-2">
-              <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
+              <h1 className="max-w-xs text-3xl font-bold leading-10 tracking-tight text-text-dark">
                 {note.title}
               </h1>
               <EditPencil />
@@ -79,7 +79,7 @@ export default function NoteDetail({ note }) {
       </div>
 
       <div
-        className="w-full hover:bg-zinc-800 transition-colors cursor-pointer rounded p-3 group"
+        className="w-full hover:bg-mauve/15 transition-colors cursor-pointer rounded-xl p-3 group my-4 border border-transparent hover:border-mauve/30"
         onDoubleClick={() => setEditingField("content")}
         title="Doble click para editar"
       >
@@ -91,12 +91,14 @@ export default function NoteDetail({ note }) {
             }
             autoFocus
             rows={5}
-            className="text-justify focus:outline-none focus:ring-2 focus:ring-green-300 w-full p-3 rounded m-1 text-black dark:text-zinc-50"
+            className="text-justify focus:outline-none focus:ring-2 focus:ring-mauve w-full p-3 rounded-lg border border-mauve bg-surface-card m-1 text-text-dark"
             type="text"
           />
         ) : (
           <div className="flex gap-2 items-center">
-            <p className="text-justify">{note.content}</p>
+            <p className="text-justify text-text-dark/90 leading-relaxed">
+              {note.content}
+            </p>
             <EditPencil />
           </div>
         )}
@@ -104,22 +106,27 @@ export default function NoteDetail({ note }) {
 
       {/* example de como funcionan */}
       <section
-        className="w-full min-h-64 my-8 p-4 rounded-lg flex flex-col bg-zinc-800 text-white justify-between group cursor-pointer hover:ring-2 ring-zinc-600"
+        className="w-full min-h-64 my-8 p-6 rounded-xl flex flex-col bg-surface-card text-text-dark justify-between group cursor-pointer border border-mauve/40 shadow-sm hover:border-candy/60 transition-all"
         onDoubleClick={() => setEditingField("example")}
         title="Doble click para editar"
       >
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center mb-4">
           <div className="flex gap-2 items-center">
-            <p className="text-lg font-semibold">example</p>
+            <p className="text-xs font-bold text-candy uppercase tracking-wider">
+              Mas Detalles
+            </p>
             <EditPencil />
           </div>
-          <button onClick={handleCopy} className="top-2 right-2 cursor-pointer">
+          <button
+            onClick={handleCopy}
+            className="cursor-pointer text-text-muted-dark hover:text-candy transition-colors"
+          >
             {copied ? (
               <svg
                 width="20"
                 height="20"
                 fill="currentColor"
-                className="bi bi-clipboard-check text-green-400"
+                className="bi bi-clipboard-check text-candy"
                 viewBox="0 0 16 16"
               >
                 <path
@@ -143,7 +150,7 @@ export default function NoteDetail({ note }) {
             )}
           </button>
         </div>
-        <div className="mt-2 group text-green-500">
+        <div className="mt-2 group text-text-dark">
           {editingFiled === "example" ? (
             <textarea
               value={formData.example}
@@ -151,10 +158,10 @@ export default function NoteDetail({ note }) {
                 setFormData({ ...formData, example: e.target.value })
               }
               autoFocus
-              className="text-sm min-h-64 bg-black rounded p-2 overflow-x-auto w-full focus:outline-none focus:ring-2 ring-green-200 font-mono resize-none"
+              className="text-sm min-h-64 bg-ghost text-text-dark rounded-lg p-4 overflow-x-auto w-full focus:outline-none focus:ring-2 focus:ring-mauve font-mono border border-mauve/30 resize-none"
             />
           ) : (
-            <pre className="text-sm min-h-64 bg-black rounded p-2 overflow-x-auto">
+            <pre className="text-sm min-h-64 bg-ghost text-text-dark rounded-lg p-4 overflow-x-auto font-mono border border-mauve/30">
               <code>{note.example}</code>
             </pre>
           )}
@@ -164,9 +171,9 @@ export default function NoteDetail({ note }) {
       {editingFiled && (
         <button
           onClick={handleSave}
-          className="bg-green-600 hover:bg-green-500 px-3 py-2 rounded cursor-pointer text-white"
+          className="bg-candy hover:bg-candy-hover px-5 py-2.5 rounded-lg cursor-pointer text-white font-bold shadow-sm transition-colors"
         >
-          Save
+          Guardar Cambios
         </button>
       )}
     </main>
