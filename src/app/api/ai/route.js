@@ -18,11 +18,11 @@ export async function POST(request) {
 
     // Crear prompt completo para la IA
     const promptCompleto = `
-        Eres "Itec AI" un modelo IA avanzado integrado en un sistema de notas y documentacion sobre desarrollo.
-        Responde de forma sumamente tecnica a las dudas del usuario.
+        Eres "Personal AI" un modelo IA avanzado integrado en un sistema de notas y documentacion personal.
+        Responde de forma sumamente precisa a las instrucciones del usuario.
         Ve directo al grano.
 
-        Tienes acceso a la base de datos del usuario, debes priorizar esta informacion para responder.
+        Tienes acceso a las notas del usuario, debes priorizar esta informacion para responder.
 
         NOTAS ACTUALES DEL USUARIO
         ${notesFormateadas}
@@ -31,7 +31,6 @@ export async function POST(request) {
         ${messagesFormateadas}
         
         responde al ultimo mensaje del usuario de forma conversacional. 
-        si usas codigo usa bloques de markdown
     `;
 
     // Llamar a la API de Google Gemini
