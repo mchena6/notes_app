@@ -22,15 +22,19 @@ export default function page() {
   };
 
   return (
-    <div className="flex flex-1 items-start justify-center bg-zinc-50 font-sans dark:bg-black">
-      <NoteDetail note={nota} />
+    <div className="flex flex-col flex-1 items-center justify-start bg-ghost font-sans text-text-dark min-h-screen pb-16">
+      <div className="w-full max-w-3xl flex flex-col items-center sm:items-start">
+        <NoteDetail note={nota} />
 
-      <button
-        onClick={handleDelete}
-        className="absolute top-24 right-24 bg-red-500 text-white p-2 rounded-md cursor-pointer"
-      >
-        Delete Note
-      </button>
+        <div className="w-full px-8 mt-2 flex justify-center">
+          <button
+            onClick={handleDelete}
+            className="bg-candy text-white px-5 py-2.5 rounded-lg font-bold shadow-sm hover:bg-candy-hover transition-colors cursor-pointer text-sm"
+          >
+            Borrar nota
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

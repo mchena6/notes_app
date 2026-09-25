@@ -8,25 +8,29 @@ export default function page() {
   const { notes } = useNotes();
 
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            Notas
-          </h1>
-          <Link
-            href={"/notes/create"}
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-39.5"
-          >
-            Create Note
-          </Link>
+    <div className="flex flex-col flex-1 items-center bg-ghost font-sans text-text-dark min-h-screen">
+      <main className="flex flex-1 w-full max-w-3xl flex-col items-start justify-start py-12 px-8 bg-ghost text-text-dark">
+        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left w-full mb-6">
+          <div className="flex justify-between items-center w-full">
+            <h1 className="text-3xl font-bold leading-10 tracking-tight text-text-dark">
+              Notas
+            </h1>
+            <Link
+              href={"/notes/create"}
+              className="flex h-10 items-center justify-center gap-2 rounded-lg bg-candy px-4 text-white font-semibold transition-colors hover:bg-candy-hover shadow-sm text-sm"
+            >
+              + Create Note
+            </Link>
+          </div>
         </div>
 
         {/* Seccion que muestre mis notas */}
 
-        {notes.map((note, key) => (
-          <NoteCard key={key} note={note} />
-        ))}
+        <div className="w-full space-y-4">
+          {notes.map((note, key) => (
+            <NoteCard key={key} note={note} />
+          ))}
+        </div>
       </main>
     </div>
   );

@@ -21,6 +21,7 @@ function CreateNotePage() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(notesSchema),
@@ -43,11 +44,9 @@ function CreateNotePage() {
     try {
       const response = await axios.post("/api/generate-note", { tema });
 
-      setFormData({
-        title: response.data.result.title,
-        content: response.data.result.content,
-        example: response.data.result.example,
-      });
+      setValue("title", response.data.result.title);
+      setValue("content", response.data.result.content);
+      setValue("example", response.data.result.example);
     } catch (err) {
       console.error(err);
     } finally {
@@ -61,30 +60,29 @@ function CreateNotePage() {
   };
 
   return (
-    <section className="flex p-20 justify-center items-center w-full">
+    <section className="flex p-12 justify-center items-center w-full min-h-screen bg-ghost text-text-dark">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col flex-1  p-6 rounded-lg bg-zinc-800 font-sans"
+        className="flex flex-col flex-1 max-w-2xl p-8 rounded-xl bg-surface-card border border-mauve/40 shadow-md font-sans"
       >
         <Link
           href={"/notes"}
-          className="self-start mb-4 text-white font-semibold"
+          className="self-start mb-4 text-text-muted-dark hover:text-candy font-semibold transition-colors flex items-center gap-1 text-sm"
         >
-          &larr; Back to Notes
+          &larr; Volver a Notas
         </Link>
 
-        <p className="text-white text-lg font-semibold">Create Note</p>
+        <h1 className="text-text-dark text-2xl font-bold">Crear Nota</h1>
 
-        <div className="mt-6 p-4 rounded border border-purple-500/30 gap-2 bg-zinc-900 flex flex-col">
-          <label className="text-purple-400 text-xs font-bold tracking-wider">
-            {" "}
-            Redactar con IA de forma automatica{" "}
+        <div className="mt-6 p-4 rounded-xl border border-mauve/40 gap-2 bg-ghost flex flex-col">
+          <label className="text-candy text-xs font-bold uppercase tracking-wider">
+            Redactar con IA de forma automática
           </label>
           <div className="flex gap-2">
             <input
               type="text"
               placeholder="Ej: Promesas, Arrow Functions..."
-              className="flex-1 p-2 bg-zinc-800 rounded border border-zinc-700 focus:outline-none focus:ring-1 focus:border-purple-500"
+              className="flex-1 p-2.5 bg-surface-card rounded-lg border border-mauve/40 text-text-dark placeholder-text-muted-dark/60 focus:outline-none focus:ring-2 focus:ring-mauve text-sm"
               value={tema}
               onChange={(e) => {
                 setTema(e.target.value);
@@ -93,17 +91,17 @@ function CreateNotePage() {
             <button
               type="button"
               onClick={handleAutoFill}
-              className="bg-purple-600 hover: bg-purple-700 text-xs px-4 font-bold rounded disabled:opacity-50 cursor-pointer"
+              className="bg-candy text-white hover:bg-candy-hover text-xs px-4 font-bold rounded-lg disabled:opacity-50 cursor-pointer transition-colors shadow-sm"
             >
               {loading ? "Cargando..." : "Generar"}
             </button>
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col gap-3">
+        <div className="mt-8 flex flex-col gap-4">
           <div className="flex flex-col">
-            <p className="text-zinc-400">
-              Titulo
+            <p className="text-text-muted-dark font-semibold text-sm">
+              Título
               <label className="text-red-500 ml-2">
                 {errors.title && "*" + errors.title.message}{" "}
               </label>
@@ -111,18 +109,18 @@ function CreateNotePage() {
             <input
               type="text"
               placeholder="Title"
-              className={`p-2 border border-zinc-600 bg-zinc-900/80 rounded-md my-4 focus:outline-none focus:ring-1 focus:bg-purple-500 ${loading && "animation-pulse"} `}
+              className={`p-3 border border-mauve/40 bg-surface-card text-text-dark placeholder-text-muted-dark/60 rounded-lg my-2 focus:outline-none focus:ring-2 focus:ring-mauve text-sm ${loading && "animate-pulse"}`}
               {...register("title")}
             />
           </div>
 
           <div className="flex flex-col">
-            <label className="text-zinc-400">Category</label>
+            <label className="text-text-muted-dark font-semibold text-sm">Categoría</label>
             <select
-              className="p-2 border border-zinc-600 bg-zinc-900/80 rounded-md my-4"
+              className="p-3 border border-mauve/40 bg-surface-card text-text-dark rounded-lg my-2 text-sm focus:outline-none focus:ring-2 focus:ring-mauve"
               {...register("categoryId")}
             >
-              <option disabled={true}>Seleccionar categoria</option>
+              <option disabled={true}>Seleccionar categoría</option>
               {categories.map((category) => (
                 <option key={category.id} value={category.id}>
                   {category.title}
@@ -132,7 +130,7 @@ function CreateNotePage() {
           </div>
 
           <div className="flex flex-col">
-            <p className="text-zinc-400">
+            <p className="text-text-muted-dark font-semibold text-sm">
               Contenido
               <label className="text-red-500 ml-2">
                 {errors.content && "*" + errors.content.message}{" "}
@@ -140,28 +138,28 @@ function CreateNotePage() {
             </p>
             <textarea
               placeholder="Content"
-              className={`p-2 border border-zinc-600  bg-zinc-900/80 rounded-md my-4 focus:outline-none focus:ring-1 focus:bg-purple-500 ${loading && "animation-pulse"}`}
-              rows={10}
+              className={`p-3 border border-mauve/40 bg-surface-card text-text-dark placeholder-text-muted-dark/60 rounded-lg my-2 focus:outline-none focus:ring-2 focus:ring-mauve text-sm ${loading && "animate-pulse"}`}
+              rows={8}
               {...register("content")}
             />
           </div>
 
           <div className="flex flex-col">
-            <label className="text-zinc-400">example</label>
+            <label className="text-text-muted-dark font-semibold text-sm">Ejemplo de Código</label>
             <textarea
               placeholder="Const variable = ...."
               spellCheck={false}
-              className={`p-2 border border-zinc-600 font-mono bg-zinc-950 rounded-md my-4 focus:outline-none focus:ring-1 focus:bg-purple-500 ${loading && "animation-pulse"}`}
-              rows={10}
+              className={`p-3 border border-mauve/40 font-mono bg-ghost text-text-dark placeholder-text-muted-dark/60 rounded-lg my-2 focus:outline-none focus:ring-2 focus:ring-mauve text-sm ${loading && "animate-pulse"}`}
+              rows={8}
               {...register("example")}
             />
           </div>
 
           <button
             type="submit"
-            className={`bg-blue-500 text-white p-2 cursor-pointer rounded-md focus:outline-none focus:ring-1 focus:bg-purple-500 ${loading && "animation-pulse"}`}
+            className={`bg-candy hover:bg-candy-hover text-white font-bold p-3 cursor-pointer rounded-lg transition-colors shadow-sm text-sm mt-2 ${loading && "animate-pulse"}`}
           >
-            Save
+            Guardar Nota
           </button>
         </div>
       </form>

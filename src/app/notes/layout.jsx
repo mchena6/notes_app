@@ -18,10 +18,5 @@ function LayoutContent({ children }) {
 }
 
 export default function NotasLayout({ children }) {
-  // Envolver layout con el contexto
-  return (
-    <NotesProvider>
-      <LayoutContent>{children}</LayoutContent>
-    </NotesProvider>
-  );
+  return <LayoutContent>{children}</LayoutContent>;
 }
