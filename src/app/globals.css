@@ -1,26 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F2F5FF;
+  --foreground: #181523;
+
+  --ghost: #F2F5FF;
+  --candy: #F49097;
+  --candy-hover: #E37B83;
+  --mauve: #DFB2F4;
+  --mauve-hover: #C894E2;
+
+  --surface-dark: #12111A;
+  --surface-card: #FFFFFF;
+  --surface-card-dark: #1C1A29;
+
+  --text-dark: #181523;
+  --text-muted-dark: #4A4358;
+
+  --text-main: #181523;
+  --text-muted: #4A4358;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-ghost: var(--ghost);
+  --color-candy: var(--candy);
+  --color-candy-hover: var(--candy-hover);
+  --color-mauve: var(--mauve);
+  --color-mauve-hover: var(--mauve-hover);
+  --color-surface-dark: var(--surface-dark);
+  --color-surface-card: var(--surface-card);
+  --color-surface-card-dark: var(--surface-card-dark);
+  --color-text-dark: var(--text-dark);
+  --color-text-muted-dark: var(--text-muted-dark);
+  --color-text-main: var(--text-main);
+  --color-text-muted: var(--text-muted);
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--ghost);
+  color: var(--text-dark);
+  font-family: var(--font-sans);
 }
