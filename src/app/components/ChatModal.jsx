@@ -66,10 +66,10 @@ export default function ChatModal({ isOpen, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-3 sm:p-4"
     >
       <div
-        className="w-full max-w-xl bg-surface-card border border-mauve/40 rounded-xl p-5 flex flex-col h-125 shadow-xl text-text-dark"
+        className="w-full max-w-xl bg-surface-card border border-mauve/40 rounded-xl p-4 sm:p-5 flex flex-col h-[85vh] sm:h-125 shadow-xl text-text-dark"
       >
         <div
           className="flex justify-between items-center border-b border-mauve/20 pb-3 mb-3"
@@ -89,7 +89,7 @@ export default function ChatModal({ isOpen, onClose }) {
           {messages.map((msg) => (
             <div
               key={msg.id}
-              className={`rounded-xl p-3 max-w-[85%] text-sm leading-relaxed border ${
+              className={`rounded-xl p-3 max-w-[90%] sm:max-w-[85%] text-sm leading-relaxed border ${
                 msg.role === "user"
                   ? "bg-mauve/20 text-text-dark border-mauve/40 ml-auto"
                   : "bg-candy/15 text-text-dark border-candy/30"

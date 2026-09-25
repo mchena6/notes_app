@@ -60,10 +60,10 @@ function CreateNotePage() {
   };
 
   return (
-    <section className="flex p-12 justify-center items-center w-full min-h-screen bg-ghost text-text-dark">
+    <section className="flex p-4 sm:p-12 justify-center items-center w-full min-h-screen bg-ghost text-text-dark">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col flex-1 max-w-2xl p-8 rounded-xl bg-surface-card border border-mauve/40 shadow-md font-sans"
+        className="flex flex-col flex-1 max-w-2xl p-4 sm:p-8 rounded-xl bg-surface-card border border-mauve/40 shadow-md font-sans"
       >
         <Link
           href={"/notes"}
@@ -74,11 +74,11 @@ function CreateNotePage() {
 
         <h1 className="text-text-dark text-2xl font-bold">Crear Nota</h1>
 
-        <div className="mt-6 p-4 rounded-xl border border-mauve/40 gap-2 bg-ghost flex flex-col">
+        <div className="mt-6 p-3.5 sm:p-4 rounded-xl border border-mauve/40 gap-2 bg-ghost flex flex-col">
           <label className="text-candy text-xs font-bold uppercase tracking-wider">
             Redactar con IA de forma automática
           </label>
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-2">
             <input
               type="text"
               placeholder="Ej: Promesas, Arrow Functions..."
@@ -91,7 +91,7 @@ function CreateNotePage() {
             <button
               type="button"
               onClick={handleAutoFill}
-              className="bg-candy text-white hover:bg-candy-hover text-xs px-4 font-bold rounded-lg disabled:opacity-50 cursor-pointer transition-colors shadow-sm"
+              className="bg-candy text-white hover:bg-candy-hover text-xs px-4 py-2.5 sm:py-2 font-bold rounded-lg disabled:opacity-50 cursor-pointer transition-colors shadow-sm"
             >
               {loading ? "Cargando..." : "Generar"}
             </button>

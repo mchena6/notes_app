@@ -86,7 +86,7 @@ export default function Aside({ data }) {
     );
 
   return (
-    <aside className="w-72 py-8 px-6 border-r border-mauve/30 bg-ghost text-text-dark min-h-screen">
+    <aside className="w-full md:w-72 py-6 px-4 md:py-8 md:px-6 border-b md:border-b-0 md:border-r border-mauve/30 bg-ghost text-text-dark min-h-0 md:min-h-screen">
       <div>
         <h1 className="text-4xl font-bold text-text-dark">Notas</h1>
       </div>

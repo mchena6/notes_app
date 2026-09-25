@@ -50,10 +50,10 @@ export default function NoteDetail({ note }) {
   );
 
   return (
-    <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-12 px-8 bg-ghost text-text-dark sm:items-start">
+    <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-6 px-4 sm:py-12 sm:px-8 bg-ghost text-text-dark sm:items-start">
       <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left w-full">
         <div
-          className="w-full hover:bg-mauve/15 transition-colors cursor-pointer rounded-xl p-3 group border border-transparent hover:border-mauve/30"
+          className="w-full hover:bg-mauve/15 transition-colors cursor-pointer rounded-xl p-2.5 sm:p-3 group border border-transparent hover:border-mauve/30"
           onDoubleClick={() => setEditingField("title")}
           title="Doble click para editar"
         >
@@ -65,11 +65,11 @@ export default function NoteDetail({ note }) {
                 setFormData({ ...formData, title: e.target.value })
               }
               autoFocus
-              className="max-w-xs text-3xl focus:outline-none focus:ring-2 focus:ring-mauve w-full p-3 rounded-lg border border-mauve bg-surface-card m-1 font-bold leading-10 tracking-tight text-text-dark"
+              className="max-w-xs text-2xl sm:text-3xl focus:outline-none focus:ring-2 focus:ring-mauve w-full p-2.5 sm:p-3 rounded-lg border border-mauve bg-surface-card m-1 font-bold leading-8 sm:leading-10 tracking-tight text-text-dark"
             />
           ) : (
             <div className="flex items-center gap-2">
-              <h1 className="max-w-xs text-3xl font-bold leading-10 tracking-tight text-text-dark">
+              <h1 className="max-w-xs text-2xl sm:text-3xl font-bold leading-8 sm:leading-10 tracking-tight text-text-dark">
                 {note.title}
               </h1>
               <EditPencil />
@@ -79,7 +79,7 @@ export default function NoteDetail({ note }) {
       </div>
 
       <div
-        className="w-full hover:bg-mauve/15 transition-colors cursor-pointer rounded-xl p-3 group my-4 border border-transparent hover:border-mauve/30"
+        className="w-full hover:bg-mauve/15 transition-colors cursor-pointer rounded-xl p-2.5 sm:p-3 group my-4 border border-transparent hover:border-mauve/30"
         onDoubleClick={() => setEditingField("content")}
         title="Doble click para editar"
       >
@@ -91,12 +91,12 @@ export default function NoteDetail({ note }) {
             }
             autoFocus
             rows={5}
-            className="text-justify focus:outline-none focus:ring-2 focus:ring-mauve w-full p-3 rounded-lg border border-mauve bg-surface-card m-1 text-text-dark"
+            className="text-justify focus:outline-none focus:ring-2 focus:ring-mauve w-full p-2.5 sm:p-3 rounded-lg border border-mauve bg-surface-card m-1 text-text-dark text-sm sm:text-base"
             type="text"
           />
         ) : (
           <div className="flex gap-2 items-center">
-            <p className="text-justify text-text-dark/90 leading-relaxed">
+            <p className="text-justify text-text-dark/90 leading-relaxed text-sm sm:text-base">
               {note.content}
             </p>
             <EditPencil />
@@ -106,7 +106,7 @@ export default function NoteDetail({ note }) {
 
       {/* example de como funcionan */}
       <section
-        className="w-full min-h-64 my-8 p-6 rounded-xl flex flex-col bg-surface-card text-text-dark justify-between group cursor-pointer border border-mauve/40 shadow-sm hover:border-candy/60 transition-all"
+        className="w-full min-h-64 my-6 sm:my-8 p-4 sm:p-6 rounded-xl flex flex-col bg-surface-card text-text-dark justify-between group cursor-pointer border border-mauve/40 shadow-sm hover:border-candy/60 transition-all"
         onDoubleClick={() => setEditingField("example")}
         title="Doble click para editar"
       >

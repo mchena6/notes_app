@@ -6,8 +6,9 @@ import { SignInButton, UserButton } from "@clerk/nextjs";
 import { useAuth } from "@clerk/nextjs";
 
 export default function Navbar() {
-  // Estados del modal de chat
+  // Estados del modal de chat y menú móvil
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const { isLoaded, isSignedIn } = useAuth();
 
@@ -20,37 +21,41 @@ export default function Navbar() {
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
               <button
                 type="button"
-                command="--toggle"
-                commandfor="mobile-menu"
-                className="relative inline-flex items-center justify-center rounded-md p-2 text-text-main hover:bg-mauve/20 focus:outline-2 focus:-outline-offset-1 focus:outline-candy"
+                onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+                aria-expanded={isMobileMenuOpen}
+                aria-controls="mobile-menu"
+                className="relative inline-flex items-center justify-center rounded-md p-2 text-text-main hover:bg-mauve/20 focus:outline-2 focus:-outline-offset-1 focus:outline-candy cursor-pointer"
               >
                 <span className="sr-only">Abrir menú principal</span>
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  className="size-6 in-aria-expanded:hidden"
-                >
-                  <path
-                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  className="size-6 not-in-aria-expanded:hidden"
-                >
-                  <path
-                    d="M6 18 18 6M6 6l12 12"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                {isMobileMenuOpen ? (
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    className="size-6"
+                  >
+                    <path
+                      d="M6 18 18 6M6 6l12 12"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    className="size-6"
+                  >
+                    <path
+                      d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                )}
               </button>
             </div>
 
@@ -150,29 +155,47 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Menú Móvil */}
-        <el-disclosure id="mobile-menu" hidden className="block sm:hidden">
-          <div className="space-y-1 px-3 pt-2 pb-3 bg-ghost border-t border-mauve/20">
-            <Link
-              href="/notes"
-              className="block rounded-lg bg-mauve/20 px-3 py-2 text-base font-semibold text-text-main"
-            >
-              Notas
-            </Link>
-            <Link
-              href="/profile"
-              className="block rounded-lg px-3 py-2 text-base font-semibold text-text-main hover:bg-mauve/20 transition-colors"
-            >
-              Perfil
-            </Link>
-            <button
-              onClick={() => setIsChatOpen(true)}
-              className="w-full text-left rounded-lg px-3 py-2 text-base font-semibold text-candy bg-mauve/20 transition-colors"
-            >
-              B-IA
-            </button>
+        {/* Menú Móvil Desplegable */}
+        {isMobileMenuOpen && (
+          <div id="mobile-menu" className="block sm:hidden border-t border-mauve/20 bg-ghost shadow-md">
+            <div className="space-y-2 px-4 pt-3 pb-4">
+              <Link
+                href="/notes"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block rounded-lg px-3 py-2 text-base font-semibold text-text-main hover:bg-mauve/20 transition-colors"
+              >
+                Notas
+              </Link>
+              <Link
+                href="/profile"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block rounded-lg px-3 py-2 text-base font-semibold text-text-main hover:bg-mauve/20 transition-colors"
+              >
+                Perfil
+              </Link>
+              <button
+                onClick={() => {
+                  setIsChatOpen(true);
+                  setIsMobileMenuOpen(false);
+                }}
+                className="w-full text-left flex items-center gap-2 rounded-lg px-3 py-2 text-base font-semibold text-text-main bg-mauve/20 border border-mauve/40 hover:bg-mauve/30 transition-colors cursor-pointer"
+              >
+                <span className="inline-block w-2 h-2 rounded-full bg-candy animate-pulse"></span>
+                B-IA
+              </button>
+
+              {isLoaded && !isSignedIn && (
+                <div className="pt-2 border-t border-mauve/20 mt-2">
+                  <SignInButton>
+                    <button className="w-full bg-candy text-white rounded-lg px-4 py-2.5 text-base font-bold border border-candy/40 cursor-pointer hover:bg-candy-hover transition-colors shadow-sm text-center">
+                      Iniciar sesión
+                    </button>
+                  </SignInButton>
+                </div>
+              )}
+            </div>
           </div>
-        </el-disclosure>
+        )}
       </nav>
 
       <ChatModal isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />

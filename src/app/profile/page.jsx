@@ -17,19 +17,19 @@ export default function Page() {
   const userEmail = user?.primaryEmailAddress?.emailAddress || "";
 
   return (
-    <main className="flex flex-col items-center pt-10 pb-16 bg-ghost text-text-dark min-h-screen">
+    <main className="flex flex-col items-center px-4 sm:px-6 py-6 sm:py-10 pb-16 bg-ghost text-text-dark min-h-screen">
       {/* Header del Perfil */}
-      <section className="w-full max-w-3xl flex flex-col items-center bg-surface-card border border-mauve/40 rounded-xl p-8 shadow-sm text-text-dark">
+      <section className="w-full max-w-3xl flex flex-col items-center bg-surface-card border border-mauve/40 rounded-xl p-5 sm:p-8 shadow-sm text-text-dark text-center">
         <img
           src={userAvatar}
-          className="h-24 w-24 rounded-full border-2 border-candy shadow-sm mb-4 object-cover"
+          className="h-20 w-20 sm:h-24 sm:w-24 rounded-full border-2 border-candy shadow-sm mb-3 sm:mb-4 object-cover"
           alt={userName}
         />
-        <h1 className="text-3xl font-bold text-text-dark">{userName}</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-text-dark">{userName}</h1>
         {userEmail && (
-          <p className="text-text-muted-dark font-medium my-1">{userEmail}</p>
+          <p className="text-text-muted-dark font-medium my-1 text-sm sm:text-base break-all">{userEmail}</p>
         )}
-        <div className="flex gap-2 items-center text-candy font-semibold text-sm mt-3 bg-candy/10 px-3 py-1 rounded-full border border-candy/30">
+        <div className="flex gap-2 items-center text-candy font-semibold text-xs sm:text-sm mt-3 bg-candy/10 px-3 py-1 rounded-full border border-candy/30">
           <svg
             width="16"
             height="16"
@@ -48,12 +48,12 @@ export default function Page() {
       </section>
 
       {/* Sección Mis Notas */}
-      <section className="w-full max-w-3xl mt-10">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-text-dark">Mis Notas</h2>
+      <section className="w-full max-w-3xl mt-8 sm:mt-10">
+        <div className="flex justify-between items-center mb-4 sm:mb-6">
+          <h2 className="text-xl sm:text-2xl font-bold text-text-dark">Mis Notas</h2>
           <Link
             href="/notes/create"
-            className="bg-candy text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-candy-hover transition-colors shadow-sm"
+            className="bg-candy text-white px-3.5 py-2 sm:px-4 rounded-lg text-xs sm:text-sm font-semibold hover:bg-candy-hover transition-colors shadow-sm"
           >
             + Crear Nota
           </Link>
@@ -66,13 +66,13 @@ export default function Page() {
             ))}
           </div>
         ) : (
-          <div className="w-full bg-surface-card border border-mauve/40 rounded-xl p-8 text-center flex flex-col items-center justify-center shadow-sm">
-            <p className="text-text-muted-dark font-medium text-base mb-4">
+          <div className="w-full bg-surface-card border border-mauve/40 rounded-xl p-6 sm:p-8 text-center flex flex-col items-center justify-center shadow-sm">
+            <p className="text-text-muted-dark font-medium text-sm sm:text-base mb-4">
               Aún no has creado ninguna nota.
             </p>
             <Link
               href="/notes/create"
-              className="bg-candy text-white px-5 py-2.5 rounded-lg text-sm font-bold hover:bg-candy-hover transition-colors shadow-sm"
+              className="bg-candy text-white px-4 py-2 sm:px-5 sm:py-2.5 rounded-lg text-xs sm:text-sm font-bold hover:bg-candy-hover transition-colors shadow-sm"
             >
               Crear mi primera nota
             </Link>

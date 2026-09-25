@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div className="flex flex-col flex-1 items-center justify-center bg-ghost font-sans text-text-dark">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-24 px-12 bg-ghost text-text-dark sm:items-start">
+      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-12 px-4 sm:py-24 sm:px-12 bg-ghost text-text-dark sm:items-start">
         <Image
           src="/next.svg"
           alt="Next.js logo"
@@ -33,9 +33,9 @@ export default function Home() {
             center.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
+        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row w-full sm:w-auto">
           <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-candy text-white transition-colors hover:bg-candy-hover shadow-sm font-semibold md:w-[158px]"
+            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-candy text-white transition-colors hover:bg-candy-hover shadow-sm font-semibold sm:w-[158px]"
             href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
             target="_blank"
             rel="noopener noreferrer"
@@ -49,7 +49,7 @@ export default function Home() {
             Deploy Now
           </a>
           <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-mauve bg-mauve/15 text-text-dark transition-colors hover:bg-mauve font-semibold md:w-[158px]"
+            className="flex h-12 w-full items-center justify-center rounded-full border border-mauve bg-mauve/15 text-text-dark transition-colors hover:bg-mauve font-semibold sm:w-[158px]"
             href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
             target="_blank"
             rel="noopener noreferrer"

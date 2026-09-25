@@ -26,10 +26,10 @@ export default function page() {
       <div className="w-full max-w-3xl flex flex-col items-center sm:items-start">
         <NoteDetail note={nota} />
 
-        <div className="w-full px-8 mt-2 flex justify-center">
+        <div className="w-full px-4 sm:px-8 mt-2 flex justify-center">
           <button
             onClick={handleDelete}
-            className="bg-candy text-white px-5 py-2.5 rounded-lg font-bold shadow-sm hover:bg-candy-hover transition-colors cursor-pointer text-sm"
+            className="w-full sm:w-auto bg-candy text-white px-5 py-2.5 rounded-lg font-bold shadow-sm hover:bg-candy-hover transition-colors cursor-pointer text-sm"
           >
             Borrar nota
           </button>
