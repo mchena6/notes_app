@@ -12,7 +12,7 @@ export async function POST(request) {
     {
     title: "un titulo corto y profesional",
     content: "una explicacion conceptual breve en formato texto plano", 
-    ejemplo: "un bloque de codigo de ejemplo practico",
+    example: "un bloque de codigo de example practico",
     }
     `;
 

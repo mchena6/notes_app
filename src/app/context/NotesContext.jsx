@@ -90,7 +90,7 @@ export function NotesProvider({ children }) {
     return categories.map((category) => ({
       ...category,
       notes: notes.filter(
-        (note) => String(note.category_id) === String(category.id),
+        (note) => String(note.categoryId) === String(category.id),
       ),
     }));
   };

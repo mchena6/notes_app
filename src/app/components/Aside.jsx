@@ -59,19 +59,28 @@ export default function Aside({ data }) {
     addCategories(newCat);
   };
 
-  const filteredData = data
+  const filteredData = (data || [])
     .map((category) => {
-      const filteredNotes = category.notes.filter(
+      const safeNotes = category.notes || [];
+
+      const filteredNotes = safeNotes.filter(
         (nota) =>
-          nota.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          nota.content.toLowerCase().includes(searchQuery.toLowerCase()),
+          (nota.title || "")
+            .toLowerCase()
+            .includes((searchQuery || "").toLowerCase()) ||
+          (nota.content || "")
+            .toLowerCase()
+            .includes((searchQuery || "").toLowerCase()),
       );
+
       return { ...category, notes: filteredNotes };
     })
     .filter(
       (category) =>
         category.notes.length > 0 ||
-        category.title.toLowerCase().includes(searchQuery.toLowerCase()),
+        (category.title || "")
+          .toLowerCase()
+          .includes((searchQuery || "").toLowerCase()),
     );
 
   return (

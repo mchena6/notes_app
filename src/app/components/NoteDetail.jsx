@@ -6,12 +6,12 @@ export default function NoteDetail({ note }) {
   const { updateNote } = useNotes();
   const [copied, setCopied] = useState(false);
 
-  const [editingFiled, setEditingField] = useState(null); // "title" o "content" o "ejemplo" o "null"
+  const [editingFiled, setEditingField] = useState(null);
 
   const [formData, setFormData] = useState({
     title: "",
     content: "",
-    ejemplo: "",
+    example: "",
   });
 
   useEffect(() => {
@@ -19,14 +19,14 @@ export default function NoteDetail({ note }) {
       setFormData({
         title: note.title,
         content: note.content,
-        ejemplo: note.ejemplo || "",
+        example: note.example || "",
       });
     }
   }, [note]);
 
   const handleCopy = () => {
-    if (note.ejemplo) {
-      navigator.clipboard.writeText(note.ejemplo);
+    if (note.example) {
+      navigator.clipboard.writeText(note.example);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
@@ -102,15 +102,15 @@ export default function NoteDetail({ note }) {
         )}
       </div>
 
-      {/* Ejemplo de como funcionan */}
+      {/* example de como funcionan */}
       <section
         className="w-full min-h-64 my-8 p-4 rounded-lg flex flex-col bg-zinc-800 text-white justify-between group cursor-pointer hover:ring-2 ring-zinc-600"
-        onDoubleClick={() => setEditingField("ejemplo")}
+        onDoubleClick={() => setEditingField("example")}
         title="Doble click para editar"
       >
         <div className="flex justify-between">
           <div className="flex gap-2 items-center">
-            <p className="text-lg font-semibold">Ejemplo</p>
+            <p className="text-lg font-semibold">example</p>
             <EditPencil />
           </div>
           <button onClick={handleCopy} className="top-2 right-2 cursor-pointer">
@@ -144,18 +144,18 @@ export default function NoteDetail({ note }) {
           </button>
         </div>
         <div className="mt-2 group text-green-500">
-          {editingFiled === "ejemplo" ? (
+          {editingFiled === "example" ? (
             <textarea
-              value={formData.ejemplo}
+              value={formData.example}
               onChange={(e) =>
-                setFormData({ ...formData, ejemplo: e.target.value })
+                setFormData({ ...formData, example: e.target.value })
               }
               autoFocus
               className="text-sm min-h-64 bg-black rounded p-2 overflow-x-auto w-full focus:outline-none focus:ring-2 ring-green-200 font-mono resize-none"
             />
           ) : (
             <pre className="text-sm min-h-64 bg-black rounded p-2 overflow-x-auto">
-              <code>{note.ejemplo}</code>
+              <code>{note.example}</code>
             </pre>
           )}
         </div>

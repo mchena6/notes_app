@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { useNotes } from "./NotesContext";
+import { useNotes } from "../context/NotesContext";
 import NoteCard from "../components/NoteCard";
 
 export default function page() {

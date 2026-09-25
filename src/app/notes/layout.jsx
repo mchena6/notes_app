@@ -1,6 +1,6 @@
 "use client";
 import Aside from "../components/Aside";
-import { NotesProvider, useNotes } from "./NotesContext";
+import { NotesProvider, useNotes } from "../context/NotesContext";
 
 function LayoutContent({ children }) {
   // Traer categorias y notas

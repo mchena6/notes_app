@@ -1,8 +1,7 @@
-import Link from 'next/link'
-import React from 'react'
+import Link from "next/link";
+import React from "react";
 
 export default function page() {
-
   // funcion fetch notas => me trae un array de notas [{id: 1, title: "Nota 1", content: "Contenido de la nota 1"}, {id: 2, title: "Nota 2", content: "Contenido de la nota 2"}]
 
   return (
@@ -15,13 +14,14 @@ export default function page() {
         </div>
 
         {/* Seccion que muestre mis notas */}
-        <section className='w-full h-64 my-8 p-6 rounded-lg flex flex-col bg-zinc-800 text-white justify-between'>
+        <section className="w-full h-64 my-8 p-6 rounded-lg flex flex-col bg-zinc-800 text-white justify-between">
           <div>
-            <h1 className='font-semibold text-lg'>Esta ruta esta de ejemplo!!</h1>
+            <h1 className="font-semibold text-lg">
+              Esta ruta esta de example!!
+            </h1>
           </div>
         </section>
-
       </main>
     </div>
-  )
+  );
 }

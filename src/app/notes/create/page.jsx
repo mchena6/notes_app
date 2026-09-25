@@ -1,12 +1,13 @@
 "use client";
 import { useState } from "react";
-import { useNotes } from "../NotesContext";
+import { useNotes } from "../../context/NotesContext";
 import { useRouter } from "next/navigation";
-import { categories } from "@/lib/notes";
 import axios from "axios";
-
+import { useForm } from "react-hook-form";
 import Link from "next/link";
 import React from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { notesSchema } from "@/app/validations/NotesSchema";
 
 function CreateNotePage() {
   const router = useRouter();
@@ -17,22 +18,19 @@ function CreateNotePage() {
   const [tema, setTema] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const [formData, setFormData] = useState({
-    title: "",
-    content: "",
-    ejemplo: "",
-    category_id: 1,
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(notesSchema),
+    defaultValues: {
+      title: "",
+      content: "",
+      example: "",
+      categoryId: "",
+    },
   });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!formData.title || !formData.content)
-      return alert("Title and content are required");
-
-    addNote(formData);
-    router.push("/notes");
-  };
 
   // Funcion para llamar la API generate-note y generar la nota con IA
   const handleAutoFill = async (e) => {
@@ -48,7 +46,7 @@ function CreateNotePage() {
       setFormData({
         title: response.data.result.title,
         content: response.data.result.content,
-        ejemplo: response.data.result.ejemplo,
+        example: response.data.result.example,
       });
     } catch (err) {
       console.error(err);
@@ -57,9 +55,17 @@ function CreateNotePage() {
     }
   };
 
+  const onSubmit = (data) => {
+    addNote(data);
+    router.push("/notes");
+  };
+
   return (
     <section className="flex p-20 justify-center items-center w-full">
-      <form className="flex flex-col flex-1  p-6 rounded-lg bg-zinc-800 font-sans">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col flex-1  p-6 rounded-lg bg-zinc-800 font-sans"
+      >
         <Link
           href={"/notes"}
           className="self-start mb-4 text-white font-semibold"
@@ -96,15 +102,17 @@ function CreateNotePage() {
 
         <div className="mt-10 flex flex-col gap-3">
           <div className="flex flex-col">
-            <label className="text-zinc-400">Title</label>
+            <p className="text-zinc-400">
+              Titulo
+              <label className="text-red-500 ml-2">
+                {errors.title && "*" + errors.title.message}{" "}
+              </label>
+            </p>
             <input
               type="text"
               placeholder="Title"
               className={`p-2 border border-zinc-600 bg-zinc-900/80 rounded-md my-4 focus:outline-none focus:ring-1 focus:bg-purple-500 ${loading && "animation-pulse"} `}
-              value={formData.title}
-              onChange={(e) =>
-                setFormData({ ...formData, title: e.target.value })
-              }
+              {...register("title")}
             />
           </div>
 
@@ -112,14 +120,9 @@ function CreateNotePage() {
             <label className="text-zinc-400">Category</label>
             <select
               className="p-2 border border-zinc-600 bg-zinc-900/80 rounded-md my-4"
-              value={formData.category_id}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  category_id: String(e.target.value),
-                })
-              }
+              {...register("categoryId")}
             >
+              <option disabled={true}>Seleccionar categoria</option>
               {categories.map((category) => (
                 <option key={category.id} value={category.id}>
                   {category.title}
@@ -129,35 +132,33 @@ function CreateNotePage() {
           </div>
 
           <div className="flex flex-col">
-            <label className="text-zinc-400">Content</label>
+            <p className="text-zinc-400">
+              Contenido
+              <label className="text-red-500 ml-2">
+                {errors.content && "*" + errors.content.message}{" "}
+              </label>
+            </p>
             <textarea
               placeholder="Content"
               className={`p-2 border border-zinc-600  bg-zinc-900/80 rounded-md my-4 focus:outline-none focus:ring-1 focus:bg-purple-500 ${loading && "animation-pulse"}`}
               rows={10}
-              value={formData.content}
-              onChange={(e) =>
-                setFormData({ ...formData, content: e.target.value })
-              }
+              {...register("content")}
             />
           </div>
 
           <div className="flex flex-col">
-            <label className="text-zinc-400">Ejemplo</label>
+            <label className="text-zinc-400">example</label>
             <textarea
               placeholder="Const variable = ...."
               spellCheck={false}
               className={`p-2 border border-zinc-600 font-mono bg-zinc-950 rounded-md my-4 focus:outline-none focus:ring-1 focus:bg-purple-500 ${loading && "animation-pulse"}`}
               rows={10}
-              value={formData.ejemplo}
-              onChange={(e) =>
-                setFormData({ ...formData, ejemplo: e.target.value })
-              }
+              {...register("example")}
             />
           </div>
 
           <button
             type="submit"
-            onClick={handleSubmit}
             className={`bg-blue-500 text-white p-2 cursor-pointer rounded-md focus:outline-none focus:ring-1 focus:bg-purple-500 ${loading && "animation-pulse"}`}
           >
             Save
