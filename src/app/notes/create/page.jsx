@@ -69,7 +69,7 @@ function CreateNotePage() {
           href={"/notes"}
           className="self-start mb-4 text-text-muted-dark hover:text-candy font-semibold transition-colors flex items-center gap-1 text-sm"
         >
-          &larr; Volver a Notas
+          &larr; Volver a ver tus notas
         </Link>
 
         <h1 className="text-text-dark text-2xl font-bold">Crear Nota</h1>
@@ -81,7 +81,7 @@ function CreateNotePage() {
           <div className="flex flex-col sm:flex-row gap-2">
             <input
               type="text"
-              placeholder="Ej: Promesas, Arrow Functions..."
+              placeholder="Obtén información o anota una tarea!"
               className="flex-1 p-2.5 bg-surface-card rounded-lg border border-mauve/40 text-text-dark placeholder-text-muted-dark/60 focus:outline-none focus:ring-2 focus:ring-mauve text-sm"
               value={tema}
               onChange={(e) => {
@@ -108,14 +108,16 @@ function CreateNotePage() {
             </p>
             <input
               type="text"
-              placeholder="Title"
+              placeholder="Reunión importante..."
               className={`p-3 border border-mauve/40 bg-surface-card text-text-dark placeholder-text-muted-dark/60 rounded-lg my-2 focus:outline-none focus:ring-2 focus:ring-mauve text-sm ${loading && "animate-pulse"}`}
               {...register("title")}
             />
           </div>
 
           <div className="flex flex-col">
-            <label className="text-text-muted-dark font-semibold text-sm">Categoría</label>
+            <label className="text-text-muted-dark font-semibold text-sm">
+              Categoría
+            </label>
             <select
               className="p-3 border border-mauve/40 bg-surface-card text-text-dark rounded-lg my-2 text-sm focus:outline-none focus:ring-2 focus:ring-mauve"
               {...register("categoryId")}
@@ -137,7 +139,7 @@ function CreateNotePage() {
               </label>
             </p>
             <textarea
-              placeholder="Content"
+              placeholder="Información útil o algo que quieras recordas más adelante :)"
               className={`p-3 border border-mauve/40 bg-surface-card text-text-dark placeholder-text-muted-dark/60 rounded-lg my-2 focus:outline-none focus:ring-2 focus:ring-mauve text-sm ${loading && "animate-pulse"}`}
               rows={8}
               {...register("content")}
@@ -145,9 +147,11 @@ function CreateNotePage() {
           </div>
 
           <div className="flex flex-col">
-            <label className="text-text-muted-dark font-semibold text-sm">Ejemplo de Código</label>
+            <label className="text-text-muted-dark font-semibold text-sm">
+              Detalles
+            </label>
             <textarea
-              placeholder="Const variable = ...."
+              placeholder="Aqui puedes agregar detalles como fechas, horarios o instrucciones!"
               spellCheck={false}
               className={`p-3 border border-mauve/40 font-mono bg-ghost text-text-dark placeholder-text-muted-dark/60 rounded-lg my-2 focus:outline-none focus:ring-2 focus:ring-mauve text-sm ${loading && "animate-pulse"}`}
               rows={8}

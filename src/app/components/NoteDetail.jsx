@@ -158,10 +158,10 @@ export default function NoteDetail({ note }) {
                 setFormData({ ...formData, example: e.target.value })
               }
               autoFocus
-              className="text-sm min-h-64 bg-ghost text-text-dark rounded-lg p-4 overflow-x-auto w-full focus:outline-none focus:ring-2 focus:ring-mauve font-mono border border-mauve/30 resize-none"
+              className="text-sm min-h-64 bg-ghost text-text-dark rounded-lg p-4 w-full focus:outline-none focus:ring-2 focus:ring-mauve font-mono border border-mauve/30 resize-none whitespace-pre-wrap break-words"
             />
           ) : (
-            <pre className="text-sm min-h-64 bg-ghost text-text-dark rounded-lg p-4 overflow-x-auto font-mono border border-mauve/30">
+            <pre className="text-sm min-h-64 bg-ghost text-text-dark rounded-lg p-4 font-mono border border-mauve/30 whitespace-pre-wrap break-words">
               <code>{note.example}</code>
             </pre>
           )}
