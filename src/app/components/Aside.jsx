@@ -131,7 +131,7 @@ export default function Aside({ data }) {
             type="text"
             value={newCat}
             onChange={(e) => setNewCat(e.target.value)}
-            placeholder="Ej: Rutas..."
+            placeholder="Ej: Reuniones"
             className="focus:outline-none p-2 focus:ring-2 focus:ring-mauve rounded-lg bg-surface-card border border-mauve/50 text-text-dark placeholder-text-muted-dark/60 text-sm w-full shadow-sm"
           />
           <button className="p-2 bg-candy text-white font-bold hover:bg-candy-hover rounded-lg px-3 transition-colors shadow-sm cursor-pointer">

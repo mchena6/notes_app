@@ -7,12 +7,14 @@ export async function POST(request) {
 
     // Crear prompt completo para la IA
     const promptCompleto = `
-    Genera una nota educativa sobre el siguiente tema: "${tema}"
+    Genera una nota tomando el rol de asistente personal sobre el siguiente tema: "${tema}"
+    Si la peticion empieza con tarea/ debes anotar la tarea especificada utilizando unicamente la información brindada
+    Si la peticion empieza con info/ debes brindar información sobre el "${tema}" de forma resumida y clara
     Debes responder UNICAMENTE con un objeto JSON valido que contenga exactamente estas tres llaves (no agregues texto antes ni despues, solo el JSON):
     {
     title: "un titulo corto y profesional",
-    content: "una explicacion conceptual breve en formato texto plano", 
-    example: "un bloque de codigo de example practico",
+    content: "contenido sobre el tema dependiendo la peticion", 
+    example: "detalles importantes como fechas, horarios o instrucciones",
     }
     `;
 
