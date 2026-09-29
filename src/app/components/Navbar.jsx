@@ -102,14 +102,16 @@ export default function Navbar() {
                     Perfil
                   </Link>
 
-                  {/* Botón para abrir el modal de chat con la IA */}
-                  <button
-                    onClick={() => setIsChatOpen(true)}
-                    className="bg-mauve/30 text-text-main rounded-lg px-3.5 py-1.5 text-sm font-semibold border border-mauve/60 cursor-pointer hover:bg-mauve transition-colors flex items-center gap-1.5"
-                  >
-                    <span className="inline-block w-2 h-2 rounded-full bg-candy animate-pulse"></span>
-                    B-IA
-                  </button>
+                  {/* Botón para abrir el modal de chat con la IA (solo cuando está autenticado) */}
+                  {isLoaded && isSignedIn && (
+                    <button
+                      onClick={() => setIsChatOpen(true)}
+                      className="bg-mauve/30 text-text-main rounded-lg px-3.5 py-1.5 text-sm font-semibold border border-mauve/60 cursor-pointer hover:bg-mauve transition-colors flex items-center gap-1.5"
+                    >
+                      <span className="inline-block w-2 h-2 rounded-full bg-candy animate-pulse"></span>
+                      B-IA
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
@@ -173,16 +175,18 @@ export default function Navbar() {
               >
                 Perfil
               </Link>
-              <button
-                onClick={() => {
-                  setIsChatOpen(true);
-                  setIsMobileMenuOpen(false);
-                }}
-                className="w-full text-left flex items-center gap-2 rounded-lg px-3 py-2 text-base font-semibold text-text-main bg-mauve/20 border border-mauve/40 hover:bg-mauve/30 transition-colors cursor-pointer"
-              >
-                <span className="inline-block w-2 h-2 rounded-full bg-candy animate-pulse"></span>
-                B-IA
-              </button>
+              {isLoaded && isSignedIn && (
+                <button
+                  onClick={() => {
+                    setIsChatOpen(true);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="w-full text-left flex items-center gap-2 rounded-lg px-3 py-2 text-base font-semibold text-text-main bg-mauve/20 border border-mauve/40 hover:bg-mauve/30 transition-colors cursor-pointer"
+                >
+                  <span className="inline-block w-2 h-2 rounded-full bg-candy animate-pulse"></span>
+                  B-IA
+                </button>
+              )}
 
               {isLoaded && !isSignedIn && (
                 <div className="pt-2 border-t border-mauve/20 mt-2">
